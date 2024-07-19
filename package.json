@@ -1,12 +1,19 @@
 {
-  "name": "LeBonArtisan",
+  "name": "le-bon-artisan",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "pnpm -r lint"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "7.15.0",
+    "@typescript-eslint/parser": "7.15.0",
+    "eslint": "8.57.0",
+    "eslint-plugin-node": "^11.1.0"
+  }
 }
