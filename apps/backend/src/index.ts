@@ -4,8 +4,8 @@ import dotenv from "dotenv";
 dotenv.config({ path: "../../.env" });
 
 const app = express();
-const port = process.env.EXPRESS_PORT || 3000;
-console.log(process.env.EXPRESS_PORT)
+const port = process.env.BACKEND_PORT || 3000;
+console.log(process.env.BACKEND_PORT)
 
 app.get("/", (req, res) => {
   res.send("Hello, world!");
