@@ -13,6 +13,7 @@ export class ProductController implements IProductController {
     this.services = services;
     this.productUseCase = new ProductUseCase(this.services.product);
   }
+
   public async getAllProducts() : Promise<ResponseController<Product[]>> {
     try {
       const products = await this.productUseCase.getAllProducts();
@@ -29,7 +30,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async getProductById(productId: number) : Promise<ResponseController<Product>> {
+  public async getProductById(productId: string) : Promise<ResponseController<Product>> {
     try {
       const product = await this.productUseCase.getProductById(productId);
       return {
@@ -45,7 +46,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async createProduct(product: Product) : Promise<ResponseController<string>> {
+  public async createProduct(product: Omit<Product, "id">) : Promise<ResponseController<string>> {
     try {
       await this.productUseCase.createProduct(product);
       return {
@@ -61,7 +62,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async updateProduct(id: number, product: Product) : Promise<ResponseController<string>> {
+  public async updateProduct(id: string, product: Omit<Product, "id">) : Promise<ResponseController<string>> {
     try {
       await this.productUseCase.updateProduct(id, product);
       return {
@@ -77,7 +78,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async deleteProduct(id: number) : Promise<ResponseController<string>> {
+  public async deleteProduct(id: string) : Promise<ResponseController<string>> {
     try {
       await this.productUseCase.deleteProduct(id);
       return {
@@ -92,5 +93,4 @@ export class ProductController implements IProductController {
       }
     }
   }
-
 }

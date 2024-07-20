@@ -1,4 +1,5 @@
 export default class Product {
+  public id: string;
   public name: string;
   public type: string;
   public price: number;
@@ -7,6 +8,7 @@ export default class Product {
   public available: boolean;
 
   constructor(
+    id: string,
     name: string,
     type: string,
     price: number,
@@ -14,6 +16,7 @@ export default class Product {
     warrantyYears: number,
     available: boolean
   ) {
+    this.id = id;
     this.name = name;
     this.type = type;
     this.price = price;

@@ -21,7 +21,7 @@ const createProductRouter = (services: IServices) => {
     if (!id) {
       return res.status(HttpResponseCode.BadRequest).send("Missing product id");
     }
-    const result = await productController.getProductById(parseInt(id));
+    const result = await productController.getProductById(id);
     res.status(result.code).send(result);
   });
 
@@ -51,8 +51,16 @@ const createProductRouter = (services: IServices) => {
     const parsedWarrantyYears = parseInt(warrantyYears, 10);
     const parsedAvailable = Boolean(available);
 
-    const product = new Product(name, type, parsedPrice, parsedRating, parsedWarrantyYears, parsedAvailable);
-    const result = await productController.createProduct(product);
+    const productData: Omit<Product, "id"> = {
+      name: name,
+      type: type,
+      price: parsedPrice,
+      rating: parsedRating,
+      warrantyYears: parsedWarrantyYears,
+      available: parsedAvailable
+    };
+
+    const result = await productController.createProduct(productData);
     res.status(result.code).send(result);
   });
 
@@ -86,8 +94,16 @@ const createProductRouter = (services: IServices) => {
     const parsedWarrantyYears = parseInt(warrantyYears, 10);
     const parsedAvailable = Boolean(available);
 
-    const product = new Product(name, type, parsedPrice, parsedRating, parsedWarrantyYears, parsedAvailable);
-    const result = await productController.updateProduct(parseInt(id), product);
+    const productData: Omit<Product, "id"> = {
+      name: name,
+      type: type,
+      price: parsedPrice,
+      rating: parsedRating,
+      warrantyYears: parsedWarrantyYears,
+      available: parsedAvailable
+    };
+
+    const result = await productController.updateProduct(id, productData);
     res.status(result.code).send(result);
   });
 
@@ -96,7 +112,7 @@ const createProductRouter = (services: IServices) => {
     if (!id) {
       return res.status(HttpResponseCode.BadRequest).send("Missing product id");
     }
-    const result = await productController.deleteProduct(parseInt(id));
+    const result = await productController.deleteProduct(id);
     res.status(result.code).send(result);
   });
 
