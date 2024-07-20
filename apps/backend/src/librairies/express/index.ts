@@ -2,6 +2,8 @@ import express from "express";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
 import cors from "cors";
+import createProductRouter from "./routes/productRoutes";
+import { IServices } from "../../types/services";
 
 config({ path: "../../.env" });
 
@@ -17,9 +19,12 @@ app.use(cors({
 
 const port = process.env.EXPRESS_PORT || 3000;
 
-const startServer = async (db: () => Promise<void>) => {
+const startServer = async (db: () => Promise<void>, services: IServices) => {
   try {
     await db();
+
+    app.use("/product", createProductRouter(services));
+
     app.get("/", (req, res) => {
       res.send("Hello, world!");
     });
