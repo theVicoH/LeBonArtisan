@@ -5,7 +5,7 @@ export interface IProduct extends Document {
   type: string;
   price: number;
   rating: number;
-  warranty_years: number;
+  warrantyYears: number;
   available: boolean;
 }
 
@@ -14,7 +14,7 @@ const ProductSchema: Schema = new Schema({
   type: { type: String, required: true },
   price: { type: Number, required: true },
   rating: { type: Number, required: true },
-  warranty_years: { type: Number, required: true },
+  warrantyYears: { type: Number, required: true },
   available: { type: Boolean, required: true },
 });
 
