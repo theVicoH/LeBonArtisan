@@ -2,7 +2,7 @@
 // import { IProductService } from "../types/services";
 // import { IProductUseCase } from "../types/useCases";
 import { IProductService, IProductUseCase } from "common/types"
-import Product from "@/entities/productEntities";
+import Product from "../entities/productEntities";
 
 export class ProductUseCase implements IProductUseCase {
   constructor(private services: IProductService) {}

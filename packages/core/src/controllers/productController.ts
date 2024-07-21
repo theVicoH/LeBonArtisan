@@ -4,9 +4,9 @@
 // import { IServices } from "../types/services";
 // import { IProductUseCase } from "../types/useCases";
 // import { ProductUseCase } from "../src/useCases/productUseCase";
-import Product from "@/entities/productEntities";
-import { ProductUseCase } from "@/useCases/productUseCases";
 import { IServices, IProductController, IProductUseCase, Response, HttpResponseCode } from "common/types"
+import { ProductUseCase } from "../useCases/productUseCases";
+import Product from "../entities/productEntities";
 
 export class ProductController implements IProductController {
   private services: IServices;

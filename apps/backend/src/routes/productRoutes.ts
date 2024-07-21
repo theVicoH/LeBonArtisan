@@ -1,10 +1,9 @@
 import { Router } from "express";
-import { ProductRoutes } from "../../../types/routes";
-import { IServices } from "../../../types/services";
+import { IServices, ProductRoutes } from "common/types";
 import { Request, Response } from "express";
 import { HttpResponseCode } from "common/types";
-import Product from "../../../entities/productEntities";
-import { ProductController } from "../../../controllers/productController";
+import Product from "core/entities/productEntities";
+import { ProductController } from "core/controllers/productController";
 
 const createProductRouter = (services: IServices) => {
   const router = Router();
