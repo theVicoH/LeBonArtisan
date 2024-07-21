@@ -83,16 +83,26 @@ importers:
   packages/common:
     specifiers:
       core: workspace:^1.0.0
-      mongoose: 8.5.1
+      mongodb: workspace:^1.0.0
     dependencies:
       core: link:../core
-      mongoose: 8.5.1
+      mongodb: link:../mongodb
 
   packages/core:
     specifiers:
       common: workspace:^1.0.0
     dependencies:
       common: link:../common
+
+  packages/mongodb:
+    specifiers:
+      common: workspace:^1.0.0
+      core: workspace:^1.0.0
+      mongoose: 8.5.1
+    dependencies:
+      common: link:../common
+      core: link:../core
+      mongoose: 8.5.1
 
 packages:
 

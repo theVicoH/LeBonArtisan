@@ -12,6 +12,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "common/*": ["../../packages/common/src/*"],
+      "mongodb/*": ["../../packages/mongodb/src/*"],
     }
   },
   "include": ["src/**/*.ts"],

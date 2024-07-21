@@ -12,7 +12,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "core/*": ["../../packages/core/src/*"],
-      "mongodb/*": ["../../packages/mongodb/src/*"]
+      "common/*": ["../../packages/common/src/*"]
     }
   },
   "include": ["src/**/*.ts"],

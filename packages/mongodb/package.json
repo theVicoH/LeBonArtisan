@@ -1,8 +1,9 @@
 {
-  "name": "common",
+  "name": "mongodb",
   "version": "1.0.0",
   "dependencies": {
     "core": "workspace:^1.0.0",
-    "mongodb": "workspace:^1.0.0"
+    "common": "workspace:^1.0.0",
+    "mongoose": "8.5.1"
   }
 }

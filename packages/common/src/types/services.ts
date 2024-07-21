@@ -1,16 +1,7 @@
 // import Product from "../entities/productEntities"
 // import { IProduct } from "../librairies/mongodb/models/productModel"
-import { Document } from "mongoose";
 import Product from "core/entities/productEntities"
-export interface IProduct extends Document {
-  _id: string;
-  name: string;
-  type: string;
-  price: number;
-  rating: number;
-  warrantyYears: number;
-  available: boolean;
-}
+import { IProduct } from "mongodb/models/productModel"
 
 export interface IProductService {
   getAllProducts: ()=> Promise<IProduct[]>
