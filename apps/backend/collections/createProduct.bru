@@ -1,0 +1,23 @@
+meta {
+  name: createProduct
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{url}}/product/create
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Vico Phone",
+    "type": "phone",
+    "price": 1,
+    "rating": 5,
+    "warrantyYears": 2,
+    "available": true
+  }
+  
+}
