@@ -12,7 +12,8 @@
     "@types/react-dom": "18.3.0",
     "core": "workspace:^1.0.0",
     "mongodb": "workspace:^1.0.0",
-    "react": "18.3.1"
+    "react": "18.3.1",
+    "react-router-dom": "6.25.1"
   },
   "eslintConfig": {
     "extends": "../config/.eslintrc.json"
