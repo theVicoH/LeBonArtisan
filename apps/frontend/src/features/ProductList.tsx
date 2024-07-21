@@ -4,8 +4,9 @@ import { useDispatch } from "react-redux"
 import { setProducts } from "../stores/slices/productSlice"
 import Product from "core/entities/productEntities"
 import { Link } from "react-router-dom"
-import { Button, Modal, Box, Typography } from "@mui/material"
+import { Button } from "@mui/material"
 import { fetchProducts } from "common/services"
+import Modal from "common/components/Modal"
 
 const URL: string = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -92,24 +93,7 @@ const ProductsList: React.FC = () => {
             </div>
           ))}
       </div>
-      <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-title" aria-describedby="modal-description">
-        <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg max-w-sm w-full">
-          <Typography id="modal-title" variant="h6" component="h2">
-            Confirm Delete
-          </Typography>
-          <Typography id="modal-description" className="mt-2">
-            Are you sure you want to delete this product?
-          </Typography>
-          <div className="flex justify-end gap-2 mt-4">
-            <Button variant="contained" color="error" onClick={handleConfirmDelete}>
-              Delete
-            </Button>
-            <Button variant="contained" onClick={handleCloseModal}>
-              Cancel
-            </Button>
-          </div>
-        </Box>
-      </Modal>
+      <Modal openModal={openModal} handleCloseModal={handleCloseModal} handleConfirmDelete={handleConfirmDelete}/>
     </div>
   )
 }
