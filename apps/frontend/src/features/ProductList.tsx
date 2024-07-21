@@ -1,21 +1,42 @@
-import React, { useEffect } from 'react';
-import { useQuery } from 'react-query';
+import React, { useEffect, useState } from 'react';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 import { useDispatch } from 'react-redux';
 import { setProducts } from '../stores/slices/productSlice';
 import Product from 'core/entities/productEntities';
 import { Link } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { fetchProducts } from "common/services"
-import { MdOutlineEdit } from "react-icons/md";
+import { Button, Modal, Box, Typography } from '@mui/material';
+import { fetchProducts } from "common/services";
 
-const URL : string = import.meta.env.VITE_REACT_APP_API_URL;
+const URL: string = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProductsList: React.FC = () => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+  const [openModal, setOpenModal] = useState(false);
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
 
   const { data: products, error, isLoading } = useQuery<Product[], Error>(
-    'products', 
+    'products',
     () => fetchProducts(URL)
+  );
+
+  const deleteMutation = useMutation(
+    (productId: string) => fetch(`${URL}/product/delete`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ id: productId }),
+    }),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries('products');
+        setOpenModal(false);
+      },
+      onError: () => {
+        alert('Failed to delete product.');
+      }
+    }
   );
 
   useEffect(() => {
@@ -23,6 +44,22 @@ const ProductsList: React.FC = () => {
       dispatch(setProducts(products));
     }
   }, [products, dispatch]);
+
+  const handleDeleteClick = (productId: string) => {
+    setSelectedProductId(productId);
+    setOpenModal(true);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedProductId) {
+      deleteMutation.mutate(selectedProductId);
+    }
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+    setSelectedProductId(null);
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -41,14 +78,34 @@ const ProductsList: React.FC = () => {
             <p>{product.type}</p>
             <p>{product.price}$</p>
             <p>{product.rating}/5</p>
-            {/* <p>Warranty Years: {product.warrantyYears}</p>
-            <p>Available: {product.available ? 'Yes' : 'No'}</p> */}
-            <Link to={`/edit/${product.id}`}>
-              <Button variant="contained" color="secondary"><MdOutlineEdit width="40px" /></Button>
-            </Link>
+            <div className='flex gap-2'>
+              <Link to={`/edit/${product.id}`}>
+                <Button variant="contained" color="secondary">Edit</Button>
+              </Link>
+              <Button variant="contained" color="error" onClick={() => handleDeleteClick(product.id)}>Delete</Button>
+            </div>
           </div>
         ))}
       </div>
+      <Modal
+        open={openModal}
+        onClose={handleCloseModal}
+        aria-labelledby="modal-title"
+        aria-describedby="modal-description"
+      >
+        <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg max-w-sm w-full">
+          <Typography id="modal-title" variant="h6" component="h2">
+            Confirm Delete
+          </Typography>
+          <Typography id="modal-description" className="mt-2">
+            Are you sure you want to delete this product?
+          </Typography>
+          <div className='flex justify-end gap-2 mt-4'>
+            <Button variant="contained" color="error" onClick={handleConfirmDelete}>Delete</Button>
+            <Button variant="contained" onClick={handleCloseModal}>Cancel</Button>
+          </div>
+        </Box>
+      </Modal>
     </div>
   );
 };
