@@ -81,7 +81,18 @@ importers:
       vite: 5.3.4
 
   packages/common:
-    specifiers: {}
+    specifiers:
+      core: workspace:^1.0.0
+      mongoose: 8.5.1
+    dependencies:
+      core: link:../core
+      mongoose: 8.5.1
+
+  packages/core:
+    specifiers:
+      common: workspace:^1.0.0
+    dependencies:
+      common: link:../common
 
 packages:
 

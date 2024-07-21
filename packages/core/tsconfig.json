@@ -12,7 +12,6 @@
     "paths": {
       "@/*": ["./src/*"],
       "common/*": ["../../packages/common/src/*"],
-      "core/*": ["../../packages/core/src/*"]
     }
   },
   "include": ["src/**/*.ts"],
