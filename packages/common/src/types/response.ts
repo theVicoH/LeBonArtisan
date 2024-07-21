@@ -22,26 +22,23 @@ export enum HttpResponseCode {
   GatewayTimeout = 504,
 }
 
-
 export interface SuccessResponse<T = undefined> {
-  code: HttpResponseCode;
+  code: HttpResponseCode
   body: T extends undefined
     ? {
-        message: string;
+        message: string
       }
     : {
-        message: string;
-        data: T;
-      };
+        message: string
+        data: T
+      }
 }
 
 export interface ErrorResponse {
-  code: HttpResponseCode;
+  code: HttpResponseCode
   body: {
-    message: string;
-  };
+    message: string
+  }
 }
 
-export type Response<T = undefined> =
-  | SuccessResponse<T>
-  | ErrorResponse;
+export type Response<T = undefined> = SuccessResponse<T> | ErrorResponse

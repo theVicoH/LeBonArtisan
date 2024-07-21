@@ -1,8 +1,10 @@
-import UpdateProductForm from '@/features/UpdateProductForm'
+import UpdateProductForm from "@/features/UpdateProductForm"
 
 const EditProduct = () => {
   return (
-    <div><UpdateProductForm /></div>
+    <div>
+      <UpdateProductForm />
+    </div>
   )
 }
 

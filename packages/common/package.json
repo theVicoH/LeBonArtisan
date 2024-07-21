@@ -1,6 +1,10 @@
 {
   "name": "common",
   "version": "1.0.0",
+  "scripts": {
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.gitignore",
+    "format": "prettier --config ../config/.prettierrc --write ."
+  },
   "dependencies": {
     "core": "workspace:^1.0.0",
     "mongodb": "workspace:^1.0.0"

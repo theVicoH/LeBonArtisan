@@ -1,36 +1,36 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import Product from 'core/entities/productEntities';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import Product from "core/entities/productEntities"
 
 interface ProductState {
-  products: Product[];
+  products: Product[]
 }
 
 const initialState: ProductState = {
   products: [],
-};
+}
 
 const productSlice = createSlice({
-  name: 'products',
+  name: "products",
   initialState,
   reducers: {
     setProducts: (state, action: PayloadAction<Product[]>) => {
-      state.products = action.payload;
+      state.products = action.payload
     },
     addProduct: (state, action: PayloadAction<Product>) => {
-      state.products.push(action.payload);
+      state.products.push(action.payload)
     },
     updateProduct: (state, action: PayloadAction<Product>) => {
-      const index = state.products.findIndex(p => p.id === action.payload.id);
+      const index = state.products.findIndex((p) => p.id === action.payload.id)
       if (index !== -1) {
-        state.products[index] = action.payload;
+        state.products[index] = action.payload
       }
     },
     deleteProduct: (state, action: PayloadAction<string>) => {
-      state.products = state.products.filter(p => p.id !== action.payload);
+      state.products = state.products.filter((p) => p.id !== action.payload)
     },
   },
-});
+})
 
-export const { setProducts, addProduct, updateProduct, deleteProduct } = productSlice.actions;
+export const { setProducts, addProduct, updateProduct, deleteProduct } = productSlice.actions
 
-export default productSlice.reducer;
+export default productSlice.reducer

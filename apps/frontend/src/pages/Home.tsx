@@ -2,7 +2,9 @@ import ProductsList from "@/features/ProductList"
 
 const Home = () => {
   return (
-    <div><ProductsList/></div>
+    <div>
+      <ProductsList />
+    </div>
   )
 }
 

@@ -1,98 +1,98 @@
-import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
-import { useDispatch } from 'react-redux';
-import { setProducts } from '../stores/slices/productSlice';
-import Product from 'core/entities/productEntities';
-import { Link } from 'react-router-dom';
-import { Button, Modal, Box, Typography } from '@mui/material';
-import { fetchProducts } from "common/services";
+import React, { useEffect, useState } from "react"
+import { useQuery, useMutation, useQueryClient } from "react-query"
+import { useDispatch } from "react-redux"
+import { setProducts } from "../stores/slices/productSlice"
+import Product from "core/entities/productEntities"
+import { Link } from "react-router-dom"
+import { Button, Modal, Box, Typography } from "@mui/material"
+import { fetchProducts } from "common/services"
 
-const URL: string = import.meta.env.VITE_REACT_APP_API_URL;
+const URL: string = import.meta.env.VITE_REACT_APP_API_URL
 
 const ProductsList: React.FC = () => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-  const [openModal, setOpenModal] = useState(false);
-  const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const dispatch = useDispatch()
+  const queryClient = useQueryClient()
+  const [openModal, setOpenModal] = useState(false)
+  const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
 
-  const { data: products, error, isLoading } = useQuery<Product[], Error>(
-    'products',
-    () => fetchProducts(URL)
-  );
+  const { data: products, error, isLoading } = useQuery<Product[], Error>("products", () => fetchProducts(URL))
 
   const deleteMutation = useMutation(
-    (productId: string) => fetch(`${URL}/product/delete`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ id: productId }),
-    }),
+    (productId: string) =>
+      fetch(`${URL}/product/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id: productId }),
+      }),
     {
       onSuccess: () => {
-        queryClient.invalidateQueries('products');
-        setOpenModal(false);
+        queryClient.invalidateQueries("products")
+        setOpenModal(false)
       },
       onError: () => {
-        alert('Failed to delete product.');
-      }
-    }
-  );
+        alert("Failed to delete product.")
+      },
+    },
+  )
 
   useEffect(() => {
     if (products) {
-      dispatch(setProducts(products));
+      dispatch(setProducts(products))
     }
-  }, [products, dispatch]);
+  }, [products, dispatch])
 
   const handleDeleteClick = (productId: string) => {
-    setSelectedProductId(productId);
-    setOpenModal(true);
-  };
+    setSelectedProductId(productId)
+    setOpenModal(true)
+  }
 
   const handleConfirmDelete = () => {
     if (selectedProductId) {
-      deleteMutation.mutate(selectedProductId);
+      deleteMutation.mutate(selectedProductId)
     }
-  };
+  }
 
   const handleCloseModal = () => {
-    setOpenModal(false);
-    setSelectedProductId(null);
-  };
+    setOpenModal(false)
+    setSelectedProductId(null)
+  }
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div>Loading...</div>
+  if (error) return <div>Error: {error.message}</div>
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Products</h1>
       <Link to="/create">
-        <Button variant="contained" color="primary">Add Product</Button>
+        <Button variant="contained" color="primary">
+          Add Product
+        </Button>
       </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
-        {Array.isArray(products) && products.map(product => (
-          <div key={product.id} className="border p-4 rounded shadow">
-            <img src="" alt="" />
-            <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p>{product.type}</p>
-            <p>{product.price}$</p>
-            <p>{product.rating}/5</p>
-            <div className='flex gap-2'>
-              <Link to={`/edit/${product.id}`}>
-                <Button variant="contained" color="secondary">Edit</Button>
-              </Link>
-              <Button variant="contained" color="error" onClick={() => handleDeleteClick(product.id)}>Delete</Button>
+        {Array.isArray(products) &&
+          products.map((product) => (
+            <div key={product.id} className="border p-4 rounded shadow">
+              <img src="" alt="" />
+              <h2 className="text-xl font-semibold">{product.name}</h2>
+              <p>{product.type}</p>
+              <p>{product.price}$</p>
+              <p>{product.rating}/5</p>
+              <div className="flex gap-2">
+                <Link to={`/edit/${product.id}`}>
+                  <Button variant="contained" color="secondary">
+                    Edit
+                  </Button>
+                </Link>
+                <Button variant="contained" color="error" onClick={() => handleDeleteClick(product.id)}>
+                  Delete
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
-      <Modal
-        open={openModal}
-        onClose={handleCloseModal}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
+      <Modal open={openModal} onClose={handleCloseModal} aria-labelledby="modal-title" aria-describedby="modal-description">
         <Box className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded shadow-lg max-w-sm w-full">
           <Typography id="modal-title" variant="h6" component="h2">
             Confirm Delete
@@ -100,14 +100,18 @@ const ProductsList: React.FC = () => {
           <Typography id="modal-description" className="mt-2">
             Are you sure you want to delete this product?
           </Typography>
-          <div className='flex justify-end gap-2 mt-4'>
-            <Button variant="contained" color="error" onClick={handleConfirmDelete}>Delete</Button>
-            <Button variant="contained" onClick={handleCloseModal}>Cancel</Button>
+          <div className="flex justify-end gap-2 mt-4">
+            <Button variant="contained" color="error" onClick={handleConfirmDelete}>
+              Delete
+            </Button>
+            <Button variant="contained" onClick={handleCloseModal}>
+              Cancel
+            </Button>
           </div>
         </Box>
       </Modal>
     </div>
-  );
-};
+  )
+}
 
-export default ProductsList;
+export default ProductsList

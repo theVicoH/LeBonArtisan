@@ -5,7 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon --exec 'ts-node -r tsconfig-paths/register' src/index.ts",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.gitignore"
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.gitignore",
+    "format": "prettier --config ../../packages/config/.prettierrc --write ."
   },
   "keywords": [],
   "author": "",

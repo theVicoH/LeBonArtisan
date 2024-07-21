@@ -1,13 +1,13 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose"
 
 export interface IProduct extends Document {
-  _id: string;
-  name: string;
-  type: string;
-  price: number;
-  rating: number;
-  warrantyYears: number;
-  available: boolean;
+  _id: string
+  name: string
+  type: string
+  price: number
+  rating: number
+  warrantyYears: number
+  available: boolean
 }
 
 const ProductSchema: Schema = new Schema({
@@ -17,6 +17,6 @@ const ProductSchema: Schema = new Schema({
   rating: { type: Number, required: true },
   warrantyYears: { type: Number, required: true },
   available: { type: Boolean, required: true },
-});
+})
 
-export default mongoose.model<IProduct>("Product", ProductSchema);
+export default mongoose.model<IProduct>("Product", ProductSchema)
