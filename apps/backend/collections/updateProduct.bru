@@ -1,0 +1,24 @@
+meta {
+  name: updateProduct
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{url}}/product/update
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "id": "669c51b02d6e548d654cce16",
+    "name": "Vico Phone",
+    "type": "phone",
+    "price": 2,
+    "rating": 5,
+    "warrantyYears": 2,
+    "available": true
+  }
+  
+}
