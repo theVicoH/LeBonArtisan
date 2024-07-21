@@ -1,5 +1,4 @@
-# mercure-project
-
+# Le Bon Artisan
 Ce projet consiste en la réalisation d'une application web de gestion de produits utilisant une architecture MERN (MongoDB, Express, React, Node.js, Typescript). L'application permet de créer, récupérer, modifier et supprimer des produits via une API REST et une interface utilisateur construite avec React et Material UI.
 
 ## Setup
