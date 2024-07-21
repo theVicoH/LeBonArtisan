@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import { Button } from "@mui/material"
 import { fetchProducts } from "common/services"
 import Modal from "common/components/Modal"
+import ProductItem from "common/components/ProductItem"
 
 const URL: string = import.meta.env.VITE_REACT_APP_API_URL
 
@@ -74,23 +75,7 @@ const ProductsList: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {Array.isArray(products) &&
           products.map((product) => (
-            <div key={product.id} className="border p-4 rounded shadow">
-              <img src="" alt="" />
-              <h2 className="text-xl font-semibold">{product.name}</h2>
-              <p>{product.type}</p>
-              <p>{product.price}$</p>
-              <p>{product.rating}/5</p>
-              <div className="flex gap-2">
-                <Link to={`/edit/${product.id}`}>
-                  <Button variant="contained" color="secondary">
-                    Edit
-                  </Button>
-                </Link>
-                <Button variant="contained" color="error" onClick={() => handleDeleteClick(product.id)}>
-                  Delete
-                </Button>
-              </div>
-            </div>
+            <ProductItem product={product} handleDeleteClick={handleDeleteClick}/>
           ))}
       </div>
       <Modal openModal={openModal} handleCloseModal={handleCloseModal} handleConfirmDelete={handleConfirmDelete}/>

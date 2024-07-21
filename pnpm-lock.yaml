@@ -137,6 +137,7 @@ importers:
       mongodb: workspace:^1.0.0
       postcss: 8.4.39
       react: 18.3.1
+      react-router-dom: 6.25.1
       tailwindcss: 3.4.6
     dependencies:
       '@mui/icons-material': 5.16.4_wnm2rfab5t5bvbydabrplcjej4
@@ -146,6 +147,7 @@ importers:
       core: link:../core
       mongodb: link:../mongodb
       react: 18.3.1
+      react-router-dom: 6.25.1_react@18.3.1
     devDependencies:
       autoprefixer: 10.4.19_postcss@8.4.39
       postcss: 8.4.39
@@ -3504,6 +3506,18 @@ packages:
       '@remix-run/router': 1.18.0
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
+      react-router: 6.25.1_react@18.3.1
+    dev: false
+
+  /react-router-dom/6.25.1_react@18.3.1:
+    resolution: {integrity: sha512-0tUDpbFvk35iv+N89dWNrJp+afLgd+y4VtorJZuOCXK0kkCWjEvb3vTJM++SYvMEpbVwXKf3FjeVveVEb6JpDQ==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      '@remix-run/router': 1.18.0
+      react: 18.3.1
       react-router: 6.25.1_react@18.3.1
     dev: false
 
