@@ -67,7 +67,7 @@ export class ProductController implements IProductController {
       await this.productUseCase.updateProduct(id, product);
       return {
         code: HttpResponseCode.Created,
-        body: { message: "Successfully created product" },
+        body: { message: "Successfully update product" },
       };
     } catch (error) {
       if (error instanceof Error) {
@@ -83,7 +83,7 @@ export class ProductController implements IProductController {
       await this.productUseCase.deleteProduct(id);
       return {
         code: HttpResponseCode.Created,
-        body: { message: "Successfully created product" },
+        body: { message: "Successfully deleted product" },
       };
     } catch (error) {
       if (error instanceof Error) {
