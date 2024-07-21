@@ -1,4 +1,4 @@
-import ProductsList from "@/components/ProductList"
+import ProductsList from "@/features/ProductList"
 
 const Home = () => {
   return (

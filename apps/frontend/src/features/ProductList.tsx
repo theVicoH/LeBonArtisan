@@ -5,25 +5,16 @@ import { setProducts } from '../stores/slices/productSlice';
 import Product from 'core/entities/productEntities';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { fetchProducts } from "common/services"
 
-const fetchProducts = async (): Promise<Product[]> => {
-  const response = await fetch("http://localhost:3000/product/all");
-  if (!response.ok) {
-    throw new Error('Failed to fetch data');
-  }
-  const responseData = await response.json();
-  if (!responseData.body || !Array.isArray(responseData.body.data)) {
-    throw new Error('Fetched data is not in the expected format');
-  }
-  return responseData.body.data;
-};
+const URL : string = import.meta.env.VITE_REACT_APP_API_URL;
 
 const ProductsList: React.FC = () => {
   const dispatch = useDispatch();
 
   const { data: products, error, isLoading } = useQuery<Product[], Error>(
     'products', 
-    fetchProducts
+    () => fetchProducts(URL)
   );
 
   useEffect(() => {
