@@ -1,12 +1,18 @@
 {
   "name": "common",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "test": "vitest",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0 --ignore-path ../../.gitignore",
+    "format": "prettier --config ../config/.prettierrc --write .",
+    "format:icons": "prettier --config ../config/.prettierrc --write ./src/icons",
+    "common": "pnpm run icons && ts-node ./src/scripts/generateImport.ts",
+    "type": "tsc",
+    "clear-icons": "ts-node ./src/scripts/clearIcons.ts",
+    "icons:remove-xmlns": "ts-node ./src/scripts/removeXmlns.ts",
+    "icons:web": "ts-node ./src/scripts/generateIconsWeb.ts",
+    "icons:mobile": "ts-node ./src/scripts/generateIconsMobile.ts && pnpm run icons:remove-xmlns",
+    "icons:add-props": "ts-node ./src/scripts/addSvgProps.ts",
+    "icons": "pnpm run clear-icons && pnpm run icons:web && pnpm run icons:mobile && pnpm run icons:add-props && pnpm run format:icons"
+  }
 }

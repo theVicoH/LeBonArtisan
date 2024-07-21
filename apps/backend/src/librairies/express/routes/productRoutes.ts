@@ -2,7 +2,7 @@ import { Router } from "express";
 import { ProductRoutes } from "../../../types/routes";
 import { IServices } from "../../../types/services";
 import { Request, Response } from "express";
-import { HttpResponseCode } from "../../../types/response";
+import { HttpResponseCode } from "common/types";
 import Product from "../../../entities/productEntities";
 import { ProductController } from "../../../controllers/productController";
 

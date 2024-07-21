@@ -24,14 +24,17 @@ importers:
       '@types/mongoose': 5.11.97
       '@types/node': 20.14.11
       body-parser: 1.20.2
+      common: workspace:^1.0.0
       cors: 2.8.5
       express: 4.19.2
       mongoose: 8.5.1
       nodemon: 3.1.4
-      ts-node: ^10.9.2
+      ts-node: 10.9.2
+      tsconfig-paths: ^4.2.0
       typescript: 5.5.3
     dependencies:
       body-parser: 1.20.2
+      common: link:../../packages/common
       cors: 2.8.5
       express: 4.19.2
       mongoose: 8.5.1
@@ -43,6 +46,7 @@ importers:
       '@types/node': 20.14.11
       nodemon: 3.1.4
       ts-node: 10.9.2_ynyb4mthmwaqwvqx3omcdfis74
+      tsconfig-paths: 4.2.0
       typescript: 5.5.3
 
   apps/frontend:
@@ -52,6 +56,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 7.15.0
       '@typescript-eslint/parser': 7.15.0
       '@vitejs/plugin-react': 4.3.1
+      common: workspace:^1.0.0
       eslint: 8.57.0
       eslint-plugin-react-hooks: 4.6.2
       eslint-plugin-react-refresh: 0.4.7
@@ -60,6 +65,7 @@ importers:
       typescript: 5.2.2
       vite: 5.3.4
     dependencies:
+      common: link:../../packages/common
       react: 18.3.1
       react-dom: 18.3.1_react@18.3.1
     devDependencies:
@@ -73,6 +79,9 @@ importers:
       eslint-plugin-react-refresh: 0.4.7_eslint@8.57.0
       typescript: 5.2.2
       vite: 5.3.4
+
+  packages/common:
+    specifiers: {}
 
 packages:
 
@@ -2261,6 +2270,10 @@ packages:
       brace-expansion: 2.0.1
     dev: true
 
+  /minimist/1.2.8:
+    resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
+    dev: true
+
   /mongodb-connection-string-url/3.0.1:
     resolution: {integrity: sha512-XqMGwRX0Lgn05TDB4PyG2h2kKO/FfWJyCzYQbIhXUxz7ETt0I/FqHjUeqj37irJ+Dl1ZtU82uYyj14u2XsZKfg==}
     dependencies:
@@ -2762,6 +2775,11 @@ packages:
       ansi-regex: 5.0.1
     dev: true
 
+  /strip-bom/3.0.0:
+    resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
+    engines: {node: '>=4'}
+    dev: true
+
   /strip-json-comments/3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
@@ -2863,6 +2881,15 @@ packages:
       typescript: 5.5.3
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
+    dev: true
+
+  /tsconfig-paths/4.2.0:
+    resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
+    engines: {node: '>=6'}
+    dependencies:
+      json5: 2.2.3
+      minimist: 1.2.8
+      strip-bom: 3.0.0
     dev: true
 
   /type-check/0.4.0:

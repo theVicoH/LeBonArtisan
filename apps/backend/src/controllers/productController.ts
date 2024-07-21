@@ -1,6 +1,6 @@
 import Product from "../entities/productEntities";
 import { IProductController } from "../types/controllers";
-import { HttpResponseCode, ResponseController } from "../types/response";
+import { HttpResponseCode, Response } from "common/types";
 import { IServices } from "../types/services";
 import { IProductUseCase } from "../types/useCases";
 import { ProductUseCase } from "../useCases/productUseCase";
@@ -14,7 +14,7 @@ export class ProductController implements IProductController {
     this.productUseCase = new ProductUseCase(this.services.product);
   }
 
-  public async getAllProducts() : Promise<ResponseController<Product[]>> {
+  public async getAllProducts() : Promise<Response<Product[]>> {
     try {
       const products = await this.productUseCase.getAllProducts();
       return {
@@ -30,7 +30,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async getProductById(productId: string) : Promise<ResponseController<Product>> {
+  public async getProductById(productId: string) : Promise<Response<Product>> {
     try {
       const product = await this.productUseCase.getProductById(productId);
       return {
@@ -46,7 +46,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async createProduct(product: Omit<Product, "id">) : Promise<ResponseController<string>> {
+  public async createProduct(product: Omit<Product, "id">) : Promise<Response<string>> {
     try {
       await this.productUseCase.createProduct(product);
       return {
@@ -62,7 +62,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async updateProduct(id: string, product: Omit<Product, "id">) : Promise<ResponseController<string>> {
+  public async updateProduct(id: string, product: Omit<Product, "id">) : Promise<Response<string>> {
     try {
       await this.productUseCase.updateProduct(id, product);
       return {
@@ -78,7 +78,7 @@ export class ProductController implements IProductController {
     }
   }
 
-  public async deleteProduct(id: string) : Promise<ResponseController<string>> {
+  public async deleteProduct(id: string) : Promise<Response<string>> {
     try {
       await this.productUseCase.deleteProduct(id);
       return {

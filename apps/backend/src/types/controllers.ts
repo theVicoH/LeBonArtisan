@@ -1,10 +1,10 @@
 import Product from "../entities/productEntities"
-import { ResponseController } from "./response"
+import { Response } from "common/types"
 
 export interface IProductController {
-  getAllProducts: ()=> Promise<ResponseController<Product[]>>
-  getProductById: (productId: string)=> Promise<ResponseController<Product>>
-  createProduct: (product: Product)=> Promise<ResponseController<string>>
-  updateProduct: (id: string, product: Product) => Promise<ResponseController<string>>
-  deleteProduct: (id: string) => Promise<ResponseController<string>>
+  getAllProducts: ()=> Promise<Response<Product[]>>
+  getProductById: (productId: string)=> Promise<Response<Product>>
+  createProduct: (product: Product)=> Promise<Response<string>>
+  updateProduct: (id: string, product: Product) => Promise<Response<string>>
+  deleteProduct: (id: string) => Promise<Response<string>>
 }
