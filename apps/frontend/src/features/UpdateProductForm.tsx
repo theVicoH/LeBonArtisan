@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { TextField, Button, Box, Typography, Snackbar, Alert } from '@mui/material';
-import { useMutation, useQueryClient } from 'react-query';
-import { Link } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
+import { useParams, Link } from 'react-router-dom';
 
 const PRODUCT_SCHEMA = z.object({
+  id: z.string(),
   name: z.string().min(1, 'Name is required'),
   type: z.string().min(1, 'Type is required'),
   price: z.number().min(1, 'Price must be at least 1'),
@@ -15,11 +16,12 @@ const PRODUCT_SCHEMA = z.object({
   available: z.boolean(),
 });
 
-const URL : string = import.meta.env.VITE_REACT_APP_API_URL;
+const URL: string = import.meta.env.VITE_REACT_APP_API_URL;
 
 type Product = z.infer<typeof PRODUCT_SCHEMA>;
 
-const CreateProductForm: React.FC = () => {
+const UpdateProductForm: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
   const { register, handleSubmit, formState: { errors }, reset } = useForm<Product>({
     resolver: zodResolver(PRODUCT_SCHEMA),
   });
@@ -28,38 +30,56 @@ const CreateProductForm: React.FC = () => {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
 
+  const { data: product, isLoading, error } = useQuery<Product>(['product', id], () =>
+    fetch(`${URL}/product/${id}`).then(res => res.json())
+  );
+
+  useEffect(() => {
+    if (product) {
+      reset(product);
+    }
+  }, [product, reset]);
+
   const mutation = useMutation(
-    (newProduct: Product) => fetch(`${URL}/product/create`, {
-      method: 'POST',
+    (updatedProduct: Product) => fetch(`${URL}/product/update`, {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(newProduct),
+      body: JSON.stringify(updatedProduct),
     }),
     {
       onSuccess: () => {
         queryClient.invalidateQueries('products');
-        reset();
-        setSnackbarMessage('Product created successfully!');
+        setSnackbarMessage('Product updated successfully!');
         setOpenSnackbar(true);
       },
       onError: () => {
-        setSnackbarMessage('Failed to create product.');
+        setSnackbarMessage('Failed to update product.');
         setOpenSnackbar(true);
       }
     }
   );
 
-  const onSubmit: SubmitHandler<Product> = data => mutation.mutate(data);
+  const onSubmit: SubmitHandler<Product> = data => {
+    if (id) {
+      mutation.mutate({ ...data, id });
+
+    }
+  };
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
   };
 
+  if (isLoading) return <Typography>Loading...</Typography>;
+  if (error) return <Typography>Error loading product data</Typography>;
+
   return (
     <Box className="p-4 max-w-md mx-auto">
-      <Typography variant="h4" className="mb-4">Create Product</Typography>
+      <Typography variant="h4" className="mb-4">Update Product</Typography>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="hidden" {...register('id')} value={id} />
         <div className="mb-4">
           <TextField
             label="Name"
@@ -120,13 +140,12 @@ const CreateProductForm: React.FC = () => {
         </div>
         <div className='flex flex-col gap-2'>
           <Button variant="contained" color="primary" type="submit" fullWidth>
-            Submit
+            Update
           </Button>
           <Link to={`/`}>
-            <Button variant="outlined" color="primary" fullWidth>Outlined</Button>
+            <Button variant="outlined" color="primary" fullWidth>Cancel</Button>
           </Link>
         </div>
-
       </form>
       <Snackbar
         open={openSnackbar}
@@ -141,4 +160,4 @@ const CreateProductForm: React.FC = () => {
   );
 };
 
-export default CreateProductForm;
+export default UpdateProductForm;

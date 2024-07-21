@@ -6,6 +6,7 @@ import Product from 'core/entities/productEntities';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { fetchProducts } from "common/services"
+import { MdOutlineEdit } from "react-icons/md";
 
 const URL : string = import.meta.env.VITE_REACT_APP_API_URL;
 
@@ -35,14 +36,15 @@ const ProductsList: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
         {Array.isArray(products) && products.map(product => (
           <div key={product.id} className="border p-4 rounded shadow">
+            <img src="" alt="" />
             <h2 className="text-xl font-semibold">{product.name}</h2>
-            <p>Type: {product.type}</p>
-            <p>Price: ${product.price}</p>
-            <p>Rating: {product.rating}</p>
-            <p>Warranty Years: {product.warrantyYears}</p>
-            <p>Available: {product.available ? 'Yes' : 'No'}</p>
+            <p>{product.type}</p>
+            <p>{product.price}$</p>
+            <p>{product.rating}/5</p>
+            {/* <p>Warranty Years: {product.warrantyYears}</p>
+            <p>Available: {product.available ? 'Yes' : 'No'}</p> */}
             <Link to={`/edit/${product.id}`}>
-              <Button variant="contained" color="secondary">Edit</Button>
+              <Button variant="contained" color="secondary"><MdOutlineEdit width="40px" /></Button>
             </Link>
           </div>
         ))}

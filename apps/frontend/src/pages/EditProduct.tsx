@@ -1,8 +1,8 @@
-import React from 'react'
+import UpdateProductForm from '@/features/UpdateProductForm'
 
 const EditProduct = () => {
   return (
-    <div>EditProduct</div>
+    <div><UpdateProductForm /></div>
   )
 }
 
