@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { TextField, Button, Box, Typography, Snackbar, Alert } from "@mui/material"
 import { useMutation, useQuery, useQueryClient } from "react-query"
 import { useParams, Link } from "react-router-dom"
-
-const PRODUCT_SCHEMA = z.object({
-  id: z.string(),
-  name: z.string().min(1, "Name is required"),
-  type: z.string().min(1, "Type is required"),
-  price: z.number().min(1, "Price must be at least 1"),
-  rating: z.number().min(1).max(5, "Rating must be between 1 and 5"),
-  warrantyYears: z.number().min(0, "Warranty must be at least 0 years"),
-  available: z.boolean(),
-})
+import { Product, productSchema } from "@/types/forms"
 
 const URL: string = import.meta.env.VITE_REACT_APP_API_URL
-
-type Product = z.infer<typeof PRODUCT_SCHEMA>
 
 const UpdateProductForm: React.FC = () => {
   const { id } = useParams<{ id: string }>()
@@ -28,7 +16,7 @@ const UpdateProductForm: React.FC = () => {
     formState: { errors },
     reset,
   } = useForm<Product>({
-    resolver: zodResolver(PRODUCT_SCHEMA),
+    resolver: zodResolver(productSchema),
   })
 
   const queryClient = useQueryClient()

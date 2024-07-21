@@ -5,7 +5,7 @@ import { setProducts } from "../stores/slices/productSlice"
 import Product from "core/entities/productEntities"
 import { Link } from "react-router-dom"
 import { Button } from "@mui/material"
-import { fetchProducts } from "common/services"
+import { getAllProducts } from "common/services"
 import Modal from "common/components/Modal"
 import ProductItem from "common/components/ProductItem"
 
@@ -17,7 +17,7 @@ const ProductsList: React.FC = () => {
   const [openModal, setOpenModal] = useState(false)
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null)
 
-  const { data: products, error, isLoading } = useQuery<Product[], Error>("products", () => fetchProducts(URL))
+  const { data: products, error, isLoading } = useQuery<Product[], Error>("products", () => getAllProducts(URL))
 
   const deleteMutation = useMutation(
     (productId: string) =>
