@@ -1,5 +1,3 @@
-// import Product from "../entities/productEntities"
-// import { IProduct } from "../librairies/mongodb/models/productModel"
 import Product from "core/entities/productEntities"
 import { IProduct } from "mongodb/models/productModel"
 

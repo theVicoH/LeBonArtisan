@@ -1,6 +1,3 @@
-// import Product from "../entities/productEntities";
-// import { IProductService } from "../types/services";
-// import { IProductUseCase } from "../types/useCases";
 import { IProductService, IProductUseCase } from "common/types"
 import Product from "../entities/productEntities";
 

@@ -1,9 +1,3 @@
-// import Product from "../entities/productEntities";
-// import { IProductController } from "../types/controllers";
-// import { HttpResponseCode, Response } from "common/types";
-// import { IServices } from "../types/services";
-// import { IProductUseCase } from "../types/useCases";
-// import { ProductUseCase } from "../src/useCases/productUseCase";
 import { IServices, IProductController, IProductUseCase, Response, HttpResponseCode } from "common/types"
 import { ProductUseCase } from "../useCases/productUseCases";
 import Product from "../entities/productEntities";
