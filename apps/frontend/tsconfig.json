@@ -23,6 +23,11 @@
       "core/*": ["../../packages/core/src/*"]
     }
   },
-  "include": ["src"],
+  "include": [
+    "src",
+    "vite.config.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

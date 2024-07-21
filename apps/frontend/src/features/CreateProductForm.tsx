@@ -114,7 +114,7 @@ const CreateProductForm: React.FC = () => {
           <Button variant="contained" color="primary" type="submit" fullWidth>
             Submit
           </Button>
-          <Link to={`/`}>
+          <Link to={"/"}>
             <Button variant="outlined" color="primary" fullWidth>
               Outlined
             </Button>

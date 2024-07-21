@@ -9,5 +9,8 @@
     "core": "workspace:^1.0.0",
     "common": "workspace:^1.0.0",
     "mongoose": "8.5.1"
+  },
+  "eslintConfig": {
+    "extends": "../config/.eslintrc.json"
   }
 }
